@@ -1,0 +1,47 @@
+---
+title: "Gantt chart"
+output:
+  word_document: default
+  html_notebook: default
+---
+
+ 
+```{r, eval=FALSE}
+library(DiagrammeR)
+tmp_file <- m
+emf(file= m, pointsize= 10, width= 5, height= 3)
+dev.off()  # Close the device
+
+
+
+tmp_file <- "EMF_plot.emf"
+# ?emf # if needed
+emf(file= tmp_file, pointsize= 10, width= 5, height= 3) # Opens a device
+temp_margins <- c(1.5, 2.3, 0.5, 0.2) # Adjust margins
+```
+
+```{r}
+mermaid("
+gantt
+dateFormat  YYYY-MM-DD
+title Proposed planning
+
+section Initiation
+Initiation (agreement signed)           :active,        first_1,    2020-03-16, 1d
+Questions & methodology design approval :active,        first_2,    2020-03-16, 2020-03-20
+Invitation & confirmation participants  :active,        first_3,    2020-03-23, 2020-04-01
+
+section Focus Groups
+Meetings Pay[.]aw               :crit, done,    import_1,   2020-04-04,1d
+Initiation meetings Mobile plan :crit, done,    import_2,   2020-04-11, 1d
+Focus groups Mobile plan        :crit, active,  import_3,   2020-04-18, 1d
+Focus groups Mobile plan        :crit, active,  import_4,   2020-04-25, 1d
+One-on-one vendor validation    :crit, active,  import_5,   2020-05-18, 2020-05-22
+
+section Report
+First draft report focus groups  :               extras_1,   2020-05-05,1d
+Recieve feedback n frst draft    :               extras_2,   2020-05-06,2020-05-15
+Second draft report              :               extras_3,   2020-05-29,1d
+Complete final report            : crit,               extras_4,   2020-06-05,1d
+") # create your plot
+```
