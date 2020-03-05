@@ -8,19 +8,12 @@ output:
  
 ```{r, eval=FALSE}
 library(DiagrammeR)
-tmp_file <- m
-emf(file= m, pointsize= 10, width= 5, height= 3)
-dev.off()  # Close the device
-
-
+library(devEMF)
 
 tmp_file <- "EMF_plot.emf"
 # ?emf # if needed
 emf(file= tmp_file, pointsize= 10, width= 5, height= 3) # Opens a device
 temp_margins <- c(1.5, 2.3, 0.5, 0.2) # Adjust margins
-```
-
-```{r}
 mermaid("
 gantt
 dateFormat  YYYY-MM-DD
@@ -44,4 +37,4 @@ Recieve feedback n frst draft    :               extras_2,   2020-05-06,2020-05-
 Second draft report              :               extras_3,   2020-05-29,1d
 Complete final report            : crit,               extras_4,   2020-06-05,1d
 ") # create your plot
-```
+dev.off()  # Close the device
