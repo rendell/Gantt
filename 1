@@ -33,4 +33,6 @@ First draft report   :               extras_1,   2020-06-12,1d
 Recieve feedback on first draft    :               extras_2,   2020-06-19,1d
 Submit final report            : crit,               extras_4,   2020-06-26,1d
 ") # create your plot
+htmlwidgets::saveWidget(m, file="m.html")
+webshot::webshot("m.html", "m.png")
 dev.off()  # Close the device
