@@ -1,0 +1,37 @@
+---
+  title: "Gantt chart"
+output:
+  word_document: default
+html_notebook: default
+---
+  
+library(DiagrammeR)
+library(devEMF)
+
+tmp_file <- "EMF_plot.emf"
+# ?emf # if needed
+emf(file= tmp_file, pointsize= 10, width= 5, height= 3) # Opens a device
+temp_margins <- c(1.5, 2.3, 0.5, 0.2) # Adjust margins
+mermaid("
+gantt
+dateFormat  YYYY-MM-DD
+title Proposed planning
+
+section Initiation
+Initiation (agreement signed)           :active,        first_1,    2022-05-01, 1d
+Literature review :active,        first_2,    2022-05-02, 2022-05-09
+Survey & methodology design  :active,        first_3,    2022-05-10, 14d
+
+section Survey execution
+In-person survey in public spaces               :crit, done,    import_1,   2022-05-23,14d
+
+
+section Data analysis and reporting
+Secondary data collection   :               extras_1,   2022-05-10,21d
+Analysis survey data   :               extras_1,   2022-06-06,14d
+first draft    :               extras_2,   2022-06-28,1d
+Final report            : crit,               extras_4,   2022-07-05,1d
+") # create your plot
+htmlwidgets::saveWidget(m, file="m.html")
+webshot::webshot("m.html", "m.png")
+dev.off()  # Close the device
