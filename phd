@@ -1,0 +1,55 @@
+---
+  title: "Gantt chart"
+output:
+  word_document: default
+html_notebook: default
+---
+  
+library(DiagrammeR)
+library(devEMF)
+
+tmp_file <- "EMF_plot.emf"
+
+mermaid("
+gantt
+dateFormat  YYYY-MM-DD
+title Proposed planning
+
+section Initiation
+Initiation traject  :done,        first_1,    2023-10-01, 1d
+Go-No-Go assessment :active,      first_2,    2024-01-01, 2024-11-01
+
+section Paper 1
+Data collection     :crit, active,    import_1,   2025-05-23,14d
+Analysis            :crit, active,    import_2,   2025-05-23,14d
+Writing             :crit, active,    import_3,   2025-05-23,14d
+Present             :crit, active,    import_4,   2026-05-23,14d
+
+section Paper 2
+Data collection     :crit, active,    import_5,   2026-01-01,3m
+Analysis            :crit, active,    import_6,   after import_5,3m
+Writing             :crit, active,    import_7,   after import_6,3m
+Present             :crit, active,    import_8,   after import_7,3m
+
+section Paper 3
+Data collection     :crit, active,    import_9,   2027-05-23,14d
+Analysis            :crit, active,    import_10,  2027-05-23,14d
+Writing             :crit, active,    import_11,  2027-05-23,14d
+Present             :crit, active,    import_12,  2027-05-23,14d
+
+section Paper 4
+Data collection     :crit, done,      import_13,   2024-01-01,2024-06-01
+Analysis            :crit, done,      import_14,   2024-07-01,2024-09-01
+Writing             :crit, active,    import_15,   2024-09-01,2025-03-01
+Present             :crit, active,    import_16,   2025-03-01,2025-09-01
+
+section Final phase
+Finish thesis       :active, extras_1,    2028-10-01,1d
+Submit thesis       :active, extras_2,    2029-01-01,1d
+Defense             :active, extras_3,    2029-10-01,1d
+")
+
+# create your plot
+htmlwidgets::saveWidget(m, file="m.html")
+webshot::webshot("m.html", "m.png")
+
